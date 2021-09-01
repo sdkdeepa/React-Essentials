@@ -1,36 +1,50 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import './App.css'
 
-function Header() {
-  return(
-    <header>
-     <h1>Deepa's Kitchen </h1>
-    </header>
-  )
+function Header(props) {
+	console.log(props)
+	return (
+		<header>
+			<h1>{props.name}'s Kitchen </h1>
+		</header>
+	)
 }
-function Main() {
-  return (
+function Main(props) {
+	return (
 		<section>
-			<p> I make the best and delicious food in the continent</p>
+			<p> I make the best and {props.adjective} food in the continent</p>
+      <ul style={{ textAlign:'left'}}>
+        {props.dishes.map((dish) => (<li> {dish}</li>
+        ))}
+      </ul>
 		</section>
 	)
 }
 
-function Footer() {
-  return (
+function Footer(props) {
+	return (
 		<footer>
-			<p> Ask anyone who have tested my food!</p>
+			<p> Copyright {props.year}</p>
 		</footer>
 	)
 }
+
+const dishes = [
+  "Dosa",
+  "Idli",
+  "Pani Poori",
+]
+
+
+
 function App() {
-  return (
-    <div className="App"> 
-      <Header/>
-      <Main/>
-      <Footer/>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<Header name='Deepa' />
+			<Main adjective='authentic' dishes={dishes}/>
+			<Footer year={new Date().getFullYear()} />
+		</div>
+	)
 }
 
-export default App;
+export default App
